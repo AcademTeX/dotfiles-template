@@ -1,0 +1,10 @@
+gui:
+  scrollPastBottom: false
+  sidePanelWidth: 0.4
+  showFileTree: true
+  showRandomTip: false
+git:
+  pull:
+    mode: rebase
+update:
+  method: background

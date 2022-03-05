@@ -1,0 +1,82 @@
+# ========================================================= #
+# |     BASIC SETTINGS                                    | #
+# ========================================================= #
+[user]
+  name = ""
+  email = 
+
+[url "git@github.com:"]
+  insteadOf = "gh:"
+  pushInsteadOf = "github:"
+  pushInsteadOf = "git://github.com/"
+
+[url "git://github.com/"]
+  insteadOf = "github:"
+
+[url "ssh://git@github.com/"]
+  insteadOf = https://github.com/
+
+[core]
+  excludesfile = "$HOME/.gitignore" 
+  whitespace = space-before-tab,-indent-with-non-tab,trailing-space
+  editor = nvim
+
+[apply]
+  whitespace = fix
+
+[init]
+  defaultBranch = main
+
+# ========================================================= #
+# |     COLORS FOR BETTER FORMATTING                      | #
+# ========================================================= #
+[color]
+  ui = auto
+
+[color "branch"]
+  current = yellow reverse
+  local = yellow
+  remote = green
+
+[color "diff"]
+  meta = yellow bold
+  frag = magenta bold
+  old = red
+  new = green
+
+[color "status"]
+  added = yellow
+  changed = green
+  untracked = cyan
+
+# ========================================================= #
+# |     CORE SHORTCUTS                                    | #
+# ========================================================= #
+[alias]
+  gl="!git pull --rebase"
+  gp="!git push -u origin $(git branch --show-current)"
+  log-tree="!git log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(bold black)[%an]%C(reset)%C(bold yellow)%d%C(reset)' --all"
+  dfu="!ydiff -s -w0 --wrap origin/$(git branch --show-current)"
+  dfc="!ydiff -s -w0 --wrap --cached"
+  dfm="!ydiff -s -w0 --wrap origin/main"
+  dfd="!ydiff -s -w0 --wrap origin/develop"
+  clean-branches = "!git branch --merged `git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@'` | grep -vE '\\s*(master|main|develop|dev|gh-pages|docs)$' | xargs git branch -d"
+  only-default = "!git branch --list | grep -vE '\\s*(master|main|develop|dev|gh-pages|docs)' | xargs git branch -d"
+  amend="commit --ammend -C HEAD"
+  chore = "!f() { [[ -z \"$GIT_PREFIX\" ]] || cd \"$GIT_PREFIX\" && if [ -z \"$1\" ]; then git commit -m \"chore: \" -e; elif [ \"$1\" == \"-s\" ]; then git commit -m \"chore(${2}): ${@:3}\"; else git commit -m \"chore: ${@}\"; fi }; f"
+  docs = "!f() { [[ -z \"$GIT_PREFIX\" ]] || cd \"$GIT_PREFIX\" && if [ -z \"$1\" ]; then git commit -m \"docs: \" -e; elif [ \"$1\" == \"-s\" ]; then git commit -m \"docs(${2}): ${@:3}\"; else git commit -m \"docs: ${@}\"; fi }; f"
+  feat = "!f() { [[ -z \"$GIT_PREFIX\" ]] || cd \"$GIT_PREFIX\" && if [ -z \"$1\" ]; then git commit -m \"feat: \" -e; elif [ \"$1\" == \"-s\" ]; then git commit -m \"feat(${2}): ${@:3}\"; else git commit -m \"feat: ${@}\"; fi }; f"
+  fix = "!f() { [[ -z \"$GIT_PREFIX\" ]] || cd \"$GIT_PREFIX\" && if [ -z \"$1\" ]; then git commit -m \"fix: \" -e; elif [ \"$1\" == \"-s\" ]; then git commit -m \"fix(${2}): ${@:3}\"; else git commit -m \"fix: ${@}\"; fi }; f"
+  localize = "!f() { [[ -z \"$GIT_PREFIX\" ]] || cd \"$GIT_PREFIX\" && if [ -z \"$1\" ]; then git commit -m \"localize: \" -e; elif [ \"$1\" == \"-s\" ]; then git commit -m \"localize(${2}): ${@:3}\"; else git commit -m \"localize: ${@}\"; fi }; f"
+  refactor = "!f() { [[ -z \"$GIT_PREFIX\" ]] || cd \"$GIT_PREFIX\" && if [ -z \"$1\" ]; then git commit -m \"refactor: \" -e; elif [ \"$1\" == \"-s\" ]; then git commit -m \"refactor(${2}): ${@:3}\"; else git commit -m \"refactor: ${@}\"; fi }; f"
+  style = "!f() { [[ -z \"$GIT_PREFIX\" ]] || cd \"$GIT_PREFIX\" && if [ -z \"$1\" ]; then git commit -m \"style: \" -e; elif [ \"$1\" == \"-s\" ]; then git commit -m \"style(${2}): ${@:3}\"; else git commit -m \"style: ${@}\"; fi }; f"
+  test = "!f() { [[ -z \"$GIT_PREFIX\" ]] || cd \"$GIT_PREFIX\" && if [ -z \"$1\" ]; then git commit -m \"test: \" -e; elif [ \"$1\" == \"-s\" ]; then git commit -m \"test(${2}): ${@:3}\"; else git commit -m \"test: ${@}\"; fi }; f"
+
+[ghq]
+  root = "~/Code"
+
+[filter "lfs"]
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
+  process = git-lfs filter-process
+  required = true

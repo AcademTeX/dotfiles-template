@@ -1,0 +1,80 @@
+snippet book "BibTeX citation for books" wA
+@book{$1,
+  author                = {$2},
+  title                 = {$3},
+  publisher             = {$4},
+  series                = {$5},
+  year                  = {$6},
+}
+endsnippet
+
+snippet article "BibTeX citation for articles" wA
+@article{$1,
+  author                = {$2},
+  title                 = {$3},
+  journal               = {$4},
+  volume                = {$5},
+  year                  = {$6},
+  pages                 = {$7}
+}
+endsnippet
+
+snippet arxiv "BibTeX ArXiv article" wA
+@misc{$1, 
+  author                = {$2},
+  title                 = {$3},
+  year                  = {$4},
+  eprint                = {$5},
+  primaryClass          = {${6:math.$7}},
+  arcivePrefix          = {arXiv},
+}
+endsnippet
+
+snippet misc "BibTeX citation for misc citations" wA
+@misc{$1,
+  author                = {$2},
+  title                 = {$3},
+  howpublished          = {$4},
+  year                  = {$5},
+}
+endsnippet
+
+snippet personal "BibTeX citation for personal communications" wA
+@misc{$1,
+  author                = {$2},
+  title                 = {$3},
+  year                  = {$4},
+  note                  = {$5},
+  howpublished          = {${6:Personal communication}},
+}
+endsnippet
+
+snippet courseLecture "BibTeX citation for course lectures" wA
+@unpublished{$1, 
+  author                = {$2},
+  title                 = {$3},
+  year                  = {$4},
+  notes                 = {${5:Course Name}},
+  howpublished          = {${6:Lecture}},
+}
+endsnippet
+
+snippet courseNotes "BibTeX citations for course notes" wA
+@online{$1, 
+  author                = {$2},
+  title                 = {$3},
+  year                  = {$4},
+  notes                 = {${5:Course Name}},
+  howpublished          = {${6:Lecture notes}},
+}
+endsnippet
+
+snippet subtitle "BibTex subtitle additional field" wA
+  subtitle              = {$1},
+endsnippet
+
+snippet url "BibTeX url additional field" wA
+  url                   = {$1},
+endsnippet
+
+

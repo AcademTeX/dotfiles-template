@@ -1,0 +1,73 @@
+bindkey -e
+
+export LC_CTYPE=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+
+alias dotfiles='vim $(chezmoi source-path)'
+export EDITOR='nvim'
+
+if [[ ! -d ~/.zplug ]]; then
+  git clone https://github.com/zplug/zplug ~/.zplug
+  source ~/.zplug/init.zsh && zplug update --self
+else 
+  source ~/.zplug/init.zsh
+fi
+
+source ~/.config/tokens/tokens.zsh
+
+zplug 'zplug/zplug', hook-build:'zplug --self-manage'
+
+zplug "zsh-users/zsh-completions"
+zplug "zsh-users/zsh-autosuggestions"
+zplug "zsh-users/zsh-syntax-highlighting"
+
+zplug "plugins/brew", 	from:oh-my-zsh
+zplug "plugins/git", 	from:oh-my-zsh
+zplug "plugins/gradle", from:oh-my-zsh
+zplug "plugins/tmux", 	from:oh-my-zsh
+
+zplug "qwinters/25df11f1d8602fe9adae4d18f169c6c6",      from:gist               # Better Homebrew integration for MacOS
+zplug "qwinters/1cfb8ed3da53144b0526a1a8ace65e8d", 	from:gist 		# Better MacOS Defaults
+zplug "qwinters/66cb48b3218a99c32f3fcb6c1af900d8", 	from:gist 		# Better ISO-8601 Commands
+zplug "qwinters/c654312f71f9c6da83fff240e3a6316b", 	from:gist 		# Better ZSH History file
+zplug "qwinters/da4be186799d4a6d5d8e32cb24c60183", 	from:gist 		# Better GHQ 
+zplug "qwinters/e27b708487891a08ac11f2936489e390", 	from:gist 		# Better Piping Aliases
+
+
+TYPEWRITTEN_PROMPT_LAYOUT="singleline_verbose"
+TYPEWRITTEN_CURSOR="block"
+TYPEWRITTEN_RIGHT_PROMPT_PREFIX="| "
+
+# Install packages that have not been installed yet
+if ! zplug check --verbose ; then
+    echo "Install? [y/N]: "
+    if read -q; then
+        echo ""
+        zplug install
+    fi
+fi
+
+zplug load
+
+# Set typewritten ZSH as a prompt
+autoload -U promptinit; promptinit
+prompt typewritten
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/opt/homebrew/Caskroom/miniconda/base/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/opt/homebrew/Caskroom/miniconda/base/etc/profile.d/conda.sh" ]; then
+        . "/opt/homebrew/Caskroom/miniconda/base/etc/profile.d/conda.sh"
+    else
+        export PATH="/opt/homebrew/Caskroom/miniconda/base/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
+clear
+
+

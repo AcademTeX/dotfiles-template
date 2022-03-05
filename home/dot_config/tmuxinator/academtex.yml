@@ -1,0 +1,12 @@
+name: academtex
+root: ~/Code/github.com/AcademTeX/
+startup_window: documentation
+windows: 
+  - documentation: cd AcademTeX.github.io && ls -a
+  - course-repo: cd course-repo-template && ls -a
+  - article-repo: cd article-repo-template && ls -a
+  - presentation-repo: cd presentation-repo-template && ls -a
+  - dotfiles: cd dotfiles-template && ls -a
+  - website: cd website-template && ls -a
+  - dotgithub: cd dotgithub-template && ls -a
+  - readme: cd readme-template && ls -a
